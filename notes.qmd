@@ -15,9 +15,17 @@ Help commands available! - `\?`
 **Change Database**
 `\c` \<database_name\>  
 `\dt` - list tables  
+
 **Drop Database**  
 First disconnect, then `DROP DATABASE test`
 
+## Loading Data
+Tab delimited data
+```{sql}
+COPY <table_name> (<var1>, <var2>, <var3>)
+FROM '/Users/user/data/file.tsv'
+WITH (DELIMITER E'\t', FORMAT CSV, HEADER);
+```
 
 
 
@@ -64,3 +72,47 @@ In the above example:\
 2.  Fixed point and floating-point (3 more primary types)
 
 ![Integer Types](images/fig4.1_integer_types.png)
+
+# Ch 18 psql - Postgres at the command line
+Connecting to remote service (example.com)  
+`psql -d <database> -U <user> example.com
+
+- If you see a hash at the prompt, you have superuser access  
+- If you see a greater than sign, you are a standard user
+
+On mac installs, the system creates an account with your system user name and no password to facilitate access. By default the postgres account is a superuser (so definitely change that password!)
+
+## Daily usage
+- you can paste in queries into the psql command line using standard copy and paste on all operating systems
+- RAPID EDITING/ITERATION - if you need to iterate on the last query, `\e` will open the local command line editor on the previous query. Edit, then save to see the query execute again.
+- 
+
+## Formatting Output - `\pset`
+### Background
+- [See all the options](https://www.postgresql.org/docs/current/app-psql.html)  
+- [Create a `psqlrc` file to store defaults](https://www.citusdata.com/blog/2017/07/16/customizing-my-postgres-shell-using-psqlrc/)  
+- `/pset pager` - this will show all results instead of paging through  
+
+### Formatting results grid  
+- `/pset border int` - change the grid lines on the table
+  - 0 (`/pset border int 0`) means no borders at all
+  - 1 sets internal lines between the columns
+  - 2 sets lines around the cells 
+- `/pset format unaligned` - display results with delimiter
+- `/pset footer` - toggle the results footer
+- `/pset null` - toggle whether `NULL` values are explicit in results
+
+### Viewing Expanded Results
+Sometimes when you don't have a wide terminal, it's nice to see each row as a vertical list which the column names listed.  
+- `\x` (think *e**x**panded*) will shift between list and column views
+
+## Meta-Commands for Database Information (`\d`)
+- `\dt` - list tables
+- `\dt cat*` - list tables starting with **cat**
+- `\dl` - list databases on the server
+Adding a plus (`+`) to commands will provide more details. For example, `\dt+` would expand information on the tables.
+
+![Example of psql \d Commands part 1](images/fig4.1_integer_types.png)
+![Example of psql \d Commands part 2](images/fig4.1_integer_types.png)
+
+## Importing, Exporting, and Using Files

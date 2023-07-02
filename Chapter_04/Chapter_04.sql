@@ -23,15 +23,15 @@ WITH (FORMAT CSV, HEADER, DELIMITER '|');
 
 
 -- Listing 4-2: Number data types in action
-
 CREATE TABLE number_data_types (
-    numeric_column numeric(20,5),
+    numeric_column numeric(7,2),
     real_column real,
     double_column double precision
 );
 
 INSERT INTO number_data_types
 VALUES
+	(99999.25, 999.1234567, 999.1234567890123456789),
     (.7, .7, .7),
     (2.13579, 2.13579, 2.13579),
     (2.1357987654, 2.1357987654, 2.1357987654);
