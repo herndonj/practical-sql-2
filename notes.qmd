@@ -1,0 +1,66 @@
+# psql
+Command Line setup (psql)
+
+`psql -d <database_name> -U <user_name>`
+
+Quit psql - `\q`
+
+**Help**
+Help commands available! - `\?`  
+`\h` or `\h INSERT` - list of SQL commands or a particular command  
+`\?` options for use with the psql command  
+`\? variables` for use with psql  
+
+## Databases
+**Change Database**
+`\c` \<database_name\>  
+`\dt` - list tables  
+**Drop Database**  
+First disconnect, then `DROP DATABASE test`
+
+
+
+
+
+# Postgres - Ch 4 Data Types
+
+## [Postgres and the SQL standard](https://wiki.postgresql.org/wiki/PostgreSQL_vs_SQL_Standard)
+
+## Character Strings
+
+The author recommends using `text` unless you know the length of your character data. NOTE: `text` is a postgres thing. The claim is that there is no performance hit.
+
+Small - use `char(n)` Medium - use `varchar(n)`\
+Unlimied - use `text`
+
+```{sql}
+#| label: listing 4-1: Character Data Types
+#| fig-cap: "Temperature and ozone level."
+#| warning: false
+CREATE TABLE char_data_types (
+    char_column char(10),
+    varchar_column varchar(10),
+    text_column text
+);
+
+INSERT INTO char_data_types
+VALUES
+    ('abc', 'abc', 'abc'),
+    ('defghi', 'defghi', 'defghi');
+
+COPY char_data_types TO '/Users/joel/tmp/typetest.txt'
+WITH (FORMAT CSV, HEADER, DELIMITER '|');
+```
+
+------------------------------------------------------------------------
+
+In the above example:\
+`COPY <table> TO` exports the table\
+`COPY <table> FROM` will bring it in
+
+## Understanding Numbers
+
+1.  Integers (3 types)
+2.  Fixed point and floating-point (3 more primary types)
+
+![Integer Types](images/fig4.1_integer_types.png)
