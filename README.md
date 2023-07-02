@@ -1,4 +1,4 @@
-# Practical SQL, 2nd Edition
+# Postgres SQL, 2nd Edition
 ### A Beginner's Guide to Storytelling with Data
 
 [Practical SQL, 2nd Edition](https://nostarch.com/practical-sql-2nd-edition/) is a beginner-friendly guide to the database programming language SQL. Author [Anthony DeBarros](https://www.anthonydebarros.com) starts with beginner SQL concepts such as queries, data types, and basic math and aggregation, and then works through intermediate and advanced topics including statistics, cleaning data, GIS, and automating tasks. Along the way, you'll use real-world data from the U.S. Census and other government agencies and learn the fundamentals of good database design. This is a book not only about SQL but about best practices for using it for thorough, accurate data analysis.
